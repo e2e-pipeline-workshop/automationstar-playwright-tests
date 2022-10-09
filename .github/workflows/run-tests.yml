@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-    - main
+      - main
 
 jobs:
   e2e-tests:
@@ -15,4 +15,13 @@ jobs:
       - uses: microsoft/playwright-github-action@v1
 
       - name: Install dependencies and run tests
-        run: npm install && npm test
+        run: npm install
+
+      - name: Install Playwright Dependencies
+        run: npx playwright install
+
+      - name: run the tests
+        run: npx playwright test
+
+      - name: upload test reports
+        # report ./playwright-report/index.html
