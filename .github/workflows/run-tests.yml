@@ -29,5 +29,8 @@ jobs:
       - name: run the tests
         run: npx playwright test
 
+      - name: show env 
+        run: printenv
+
       # - name: upload test reports
         # report ./playwright-report/index.html
