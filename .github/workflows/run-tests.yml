@@ -25,5 +25,5 @@ jobs:
       - name: run the tests
         run: npx playwright test
 
-      - name: upload test reports
+      # - name: upload test reports
         # report ./playwright-report/index.html
