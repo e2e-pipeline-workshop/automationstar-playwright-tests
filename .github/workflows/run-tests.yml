@@ -1,3 +1,5 @@
+- name: Build and Test the Digibank
+
 on:
   push:
     branches:
