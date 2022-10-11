@@ -12,7 +12,7 @@ on:
         type: string
         required: true 
       SUT:
-        description: 'Environment to run tests against'
+        description: 'SUT (IP) to run tests against'
         type: string
         required: true 
   
@@ -35,6 +35,9 @@ jobs:
 
       - name: Install Playwright Dependencies
         run: npx playwright install
+
+      - name: PRINTENV
+        run: printenv
 
       - name: run the tests
         if: ${{ inputs.SUT }}
