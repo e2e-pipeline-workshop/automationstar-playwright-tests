@@ -34,8 +34,8 @@ jobs:
         run: npx playwright install
 
       - name: setup Env variables
-        run: SETX SUT=${{ inputs.SUT }}
-        
+        run: export SUT=${{ inputs.SUT }}
+
       - name: PRINTENV
         run: printenv
 
