@@ -1,10 +1,20 @@
 name: Build and Test the Digibank
+run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
 
 on:
   push:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to run tests against'
+        type: string
+        required: true 
+      SUT:
+        description: 'Environment to run tests against'
+        type: string
+        required: true 
 
 jobs:
   e2e-tests:
@@ -27,6 +37,7 @@ jobs:
         run: npx playwright install
 
       - name: run the tests
+        if: ${{ inputs.SUT }}
         run: npx playwright test
 
       # - name: upload test reports
