@@ -44,5 +44,13 @@ jobs:
         with:
           name: test-report.html
           path: ./playwright-report/index.html
-      # - name: upload test reports
-        # report ./playwright-report/index.html
+
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ env.IP }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          source: "./playwright-report/index.html"
+          target: "/var/www/html/report/"
