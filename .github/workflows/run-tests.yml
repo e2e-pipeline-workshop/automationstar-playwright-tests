@@ -33,15 +33,9 @@ jobs:
       - name: Install Playwright Dependencies
         run: npx playwright install
 
-      - name: setup Env variables
-        run: export SUT=${{ inputs.SUT }}
-
-      - name: PRINTENV
-        run: printenv
-
       - name: run the tests
         if: ${{ inputs.SUT }}
-        run: npx playwright test
+        run: SUT=http://3.145.130.221:8080/bank/login npx playwright test
 
       # - name: upload test reports
         # report ./playwright-report/index.html
