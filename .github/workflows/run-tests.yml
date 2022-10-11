@@ -35,7 +35,7 @@ jobs:
 
       - name: run the tests
         if: ${{ inputs.SUT }}
-        run: SUT=http://3.145.130.221:8080/bank/login npx playwright test
+        run: SUT=http://3.145.130.221:8080/digibank/login npx playwright test
 
       # - name: upload test reports
         # report ./playwright-report/index.html
