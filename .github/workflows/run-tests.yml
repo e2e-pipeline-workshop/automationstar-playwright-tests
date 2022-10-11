@@ -40,5 +40,9 @@ jobs:
         if: ${{ inputs.SUT }}
         run: SUT="http://${{env.IP}}:8080/digibank/login" npx playwright test
 
+      - uses: actions/upload-artifact@master
+        with:
+          name: test-report.html
+          path: ./playwright-report/index.html
       # - name: upload test reports
         # report ./playwright-report/index.html
