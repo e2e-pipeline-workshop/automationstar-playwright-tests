@@ -13,9 +13,6 @@ on:
         type: string
         required: true 
 
-env:
-  SUT: $ {{ inputs.SUT }}
-
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest # or macos-latest, windows-latest
@@ -36,6 +33,9 @@ jobs:
       - name: Install Playwright Dependencies
         run: npx playwright install
 
+      - name: setup Env variables
+        run: SETX SUT=${{ inputs.SUT }}
+        
       - name: PRINTENV
         run: printenv
 
