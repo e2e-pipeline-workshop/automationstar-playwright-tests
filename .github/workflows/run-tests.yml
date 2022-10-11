@@ -15,7 +15,7 @@ on:
         description: 'Environment to run tests against'
         type: string
         required: true 
-
+  
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest # or macos-latest, windows-latest

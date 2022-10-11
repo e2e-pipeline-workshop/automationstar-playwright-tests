@@ -2,7 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 
 const username = 'jsmith@demo.io';
 const password = 'Demo123!';
-const baseURL = process.env.SUT ? process.env.SUT : 'http://localhost:8080/bank/login',
+const baseURL = process.env.SUT ? process.env.SUT : 'http://localhost:8080/bank/login';
 
 test.beforeEach(async ({ page }) => {
   await page.goto(baseURL);
