@@ -7,14 +7,14 @@ on:
       environment:
         description: 'Environment to run tests against'
         type: string
-        required: true 
+        required: true
       SUT:
         description: 'SUT (IP) to run tests against'
         type: string
-        required: true 
+        required: true
 
 env:
-  IP: "3.145.130.221"
+  IP: '$ {{ secrets.UAT_IP }}'
 
 jobs:
   e2e-tests:
@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -52,5 +52,5 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          source: "./playwright-report/index.html"
-          target: "/var/www/html/report/"
+          source: './playwright-report/index.html'
+          target: '/var/www/html/report/'
