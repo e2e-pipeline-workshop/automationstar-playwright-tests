@@ -1,10 +1,20 @@
 name: Build and Test the Digibank
+run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }}
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to run tests against'
+        type: string
+        required: true
+      SUT:
+        description: 'SUT (IP) to run tests against'
+        type: string
+        required: true
+
+env:
+  IP: '$ {{ secrets.UAT_IP }}'
 
 jobs:
   e2e-tests:
@@ -12,7 +22,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
+
       - uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -27,10 +37,12 @@ jobs:
         run: npx playwright install
 
       - name: run the tests
-        run: npx playwright test
+        if: ${{ inputs.SUT }}
+        run: SUT="http://3.16.21.252:8080/digibank/login" npx playwright test
+        
+      - if: always()
+        uses: actions/upload-artifact@master
+        with:
+          name: test-report.html
+          path: ./playwright-report/index.html
 
-      - name: show env 
-        run: printenv
-
-      # - name: upload test reports
-        # report ./playwright-report/index.html
