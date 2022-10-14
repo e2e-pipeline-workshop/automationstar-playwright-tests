@@ -14,7 +14,7 @@ on:
         required: true
 
 env:
-  IP: '$ {{ secrets.UAT_IP }}'
+  IP: '3.16.21.252'
 
 jobs:
   e2e-tests:
@@ -38,8 +38,8 @@ jobs:
 
       - name: run the tests
         if: ${{ inputs.SUT }}
-        run: SUT="http://3.16.21.252:8080/digibank/login" npx playwright test
-        
+        run: SUT="http://${{env.IP}}:8080/digibank/login" npx playwright test
+             
       - if: always()
         uses: actions/upload-artifact@master
         with:
