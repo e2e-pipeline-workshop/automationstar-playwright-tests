@@ -14,7 +14,7 @@ on:
         required: true
 
 env:
-  IP: '3.16.21.252'
+  IP: '3.12.85.48'
 
 jobs:
   e2e-tests:
@@ -45,4 +45,8 @@ jobs:
         with:
           name: test-report.html
           path: ./playwright-report/index.html
+      
+      - if: always()
+        name: Test Report Link
+        run: echo "Test Report Link - http://${{env.IP}}/report/playwright-report/" >> $GITHUB_STEP_SUMMARY
 
