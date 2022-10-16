@@ -2,6 +2,17 @@ name: Build and Test the Digibank
 run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }}
 
 on:
+  repository_dispatch:
+    nputs:
+      environment:
+        description: 'Environment to run tests against'
+        type: string
+        required: true
+      SUT:
+        description: 'SUT (IP) to run tests against'
+        type: string
+        required: true
+    
   workflow_dispatch:
     inputs:
       environment:
