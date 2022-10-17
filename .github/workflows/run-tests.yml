@@ -3,7 +3,7 @@ run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }}
 
 on:
   repository_dispatch:
-    nputs:
+    inputs:
       environment:
         description: 'Environment to run tests against'
         type: string
