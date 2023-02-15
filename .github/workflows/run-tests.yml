@@ -1,20 +1,9 @@
-name: Build and Test the Digibank
+name: Build and Run e2e tests
 run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }}
 
 on:
   repository_dispatch:
     types: [trigger-tests]
-    
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Environment to run tests against'
-        type: string
-        required: true
-      SUT:
-        description: 'SUT (IP) to run tests against'
-        type: string
-        required: true
 
 jobs:
   e2e-tests:
@@ -47,8 +36,3 @@ jobs:
         with:
           name: test-report.html
           path: ./playwright-report/index.html
-      
-      - if: always()
-        name: Test Report Link
-        run: echo "Test Report Link - http://${{ github.event.client_payload.sut }}/report/playwright-report/" >> $GITHUB_STEP_SUMMARY
-
