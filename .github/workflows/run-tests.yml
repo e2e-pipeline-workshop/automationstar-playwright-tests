@@ -3,15 +3,7 @@ run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }}
 
 on:
   repository_dispatch:
-    inputs:
-      environment:
-        description: 'Environment to run tests against'
-        type: string
-        required: true
-      SUT:
-        description: 'SUT (IP) to run tests against'
-        type: string
-        required: true
+    types: [trigger-tests]
     
   workflow_dispatch:
     inputs:
@@ -24,15 +16,15 @@ on:
         type: string
         required: true
 
-env:
-  IP: '3.136.116.75'
-
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest # or macos-latest, windows-latest
 
     steps:
       - uses: actions/checkout@v3
+      
+      - name: Check IP
+        run: echo ${{ github.event.api_payload.sut }}
 
       - uses: actions/setup-node@v3
         with:
@@ -48,8 +40,7 @@ jobs:
         run: npx playwright install
 
       - name: run the tests
-        if: ${{ inputs.SUT }}
-        run: SUT="http://${{env.IP}}:8080/digibank/login" npx playwright test
+        run: SUT="http://${{ github.event.api_payload.sut }}:8080/digibank/login" npx playwright test
              
       - if: always()
         uses: actions/upload-artifact@master
@@ -59,5 +50,5 @@ jobs:
       
       - if: always()
         name: Test Report Link
-        run: echo "Test Report Link - http://${{env.IP}}/report/playwright-report/" >> $GITHUB_STEP_SUMMARY
+        run: echo "Test Report Link - http://${{ github.event.api_payload.sut }}/report/playwright-report/" >> $GITHUB_STEP_SUMMARY
 
