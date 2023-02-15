@@ -2,6 +2,7 @@ name: Build and Run e2e tests
 run-name: Deploy to ${{ github.event.client_payload.sut }} trigger via >${{ github.event_name }}< by @${{ github.actor }}
 
 on:
+  push:
   repository_dispatch:
     types: [trigger-tests]
     inputs: 
@@ -10,7 +11,8 @@ on:
         required: true
         
 env: 
-  SUT: ${{ github.event.client_payload.sut }}
+  SUT: '3.69.31.75'
+  # ${{ github.event.client_payload.sut }}
   
 jobs:
   e2e-tests:
