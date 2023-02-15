@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Check IP
-        run: echo ${{ github.event.api_payload.sut }}
+        run: echo ${{ github.event.client_payload.sut }}
 
       - uses: actions/setup-node@v3
         with:
@@ -40,7 +40,7 @@ jobs:
         run: npx playwright install
 
       - name: run the tests
-        run: SUT="http://${{ github.event.api_payload.sut }}:8080/digibank/login" npx playwright test
+        run: SUT="http://${{ github.event.client_payload.sut }}:8080/digibank/login" npx playwright test
              
       - if: always()
         uses: actions/upload-artifact@master
@@ -50,5 +50,5 @@ jobs:
       
       - if: always()
         name: Test Report Link
-        run: echo "Test Report Link - http://${{ github.event.api_payload.sut }}/report/playwright-report/" >> $GITHUB_STEP_SUMMARY
+        run: echo "Test Report Link - http://${{ github.event.client_payload.sut }}/report/playwright-report/" >> $GITHUB_STEP_SUMMARY
 
