@@ -1,9 +1,19 @@
 name: Build and Run e2e tests
-run-name: Deploy to ${{ inputs.environment }} by @${{ github.actor }}
+run-name: Deploy to ${{ inputs.sut }} by @${{ github.actor }}
 
 on:
   repository_dispatch:
     types: [trigger-tests]
+    inputs: 
+      sut: 
+        description: 'Testsystem IP address'
+        required: true
+        
+  workflow_dispatch:
+    inputs: 
+      sut: 
+        description: 'Testsystem IP address'
+        required: true
 
 jobs:
   e2e-tests:
@@ -11,6 +21,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - run: echo ${{ github }}
       
       - name: Check IP
         run: echo ${{ github.event.client_payload.sut }}
