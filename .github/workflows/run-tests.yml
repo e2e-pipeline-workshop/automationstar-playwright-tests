@@ -1,5 +1,5 @@
 name: Build and Run e2e tests
-run-name: Deploy to ${{ inputs.sut }} by @${{ github.actor }}
+run-name: Deploy to ${{ inputs.sut }} trigger via ${{ github.event_name }} by @${{ github.actor }}
 
 on:
   repository_dispatch:
@@ -21,8 +21,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - run: echo ${{ github }}
-      
+      - name: Dump context
+        uses: crazy-max/ghaction-dump-context@v2
+        
       - name: Check IP
         run: echo ${{ github.event.client_payload.sut }}
 
