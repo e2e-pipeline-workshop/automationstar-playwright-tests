@@ -11,8 +11,7 @@ on:
         required: true
         
 env: 
-  SUT: '3.69.31.75'
-  # ${{ github.event.client_payload.sut }}
+  SUT: ${{ github.event.client_payload.sut }}
   
 jobs:
   e2e-tests:
