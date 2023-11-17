@@ -14,14 +14,7 @@ Test Automation for the DigiBank project https://github.com/e2e-pipeline-worksho
 
 Provide a brief introduction to the project. Explain what it does and why it is useful.
 
-## Features
-
-List the main features of the project. For example:
-- Feature 1: Description
-- Feature 2: Description
-- ...
-
-## Installation
+## Installation & Usage
 
 Explain how to install the project and its dependencies. Include any necessary prerequisites or setup instructions.
 
